@@ -9,7 +9,7 @@ export const SearchResults = (props) => {
       <CRow xs={{ cols: 1 }} md={{ cols: 5 }} className="g-4" style={{ placeContent: 'center' }}>
         {props.photos?.map((photo, index) => {
           return (
-            <CPhoto key={index} src={photo.urls?.thumb} width={photo.width} height={photo.height} />
+            <CPhoto key={index} src={photo.urls?.thumb} author={photo.user?.name} width={photo.width} height={photo.height} />
           );
         })}
       </CRow>

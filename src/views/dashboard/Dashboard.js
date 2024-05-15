@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { CButton, CCol, CContainer, CFormInput, CLoadingButton, CPagination, CPaginationItem, CRow } from '@coreui/react-pro';
+import { CButton, CCol, CContainer, CForm, CFormInput, CLoadingButton, CPagination, CPaginationItem, CRow, CToast } from '@coreui/react-pro';
 import unsplashLogo from '../../assets/images/other/unsplash_logo.png';
 import { SearchResults } from './Search/SearchResults';
 import CIcon from '@coreui/icons-react';
@@ -21,17 +21,29 @@ const Dashboard = () => {
   const fetchPhotos = async () => {
     setLoading(true);
     try {
-      const result = await restApiGet(`${unsplash_url}/search/photos?page=${page}&query=${query}&client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}`);
-      setPhotos(prevPhotos => [...prevPhotos, ...result?.results]); // Append new photos to existing ones
-      setTotalPages(result?.total_pages || 0);
+      await restApiGet(`${unsplash_url}/search/photos?page=${page}&query=${query}&client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}`).then((result) => {
+        if (result?.results) {
+          setPhotos(prevPhotos => [...prevPhotos, ...result?.results]);
+          setTotalPages(result?.total_pages || 0);
+        } else {
+          alert("Oops. You have reached the rate limit!")
+          window.location.reload()
+        }
+      }).catch((e) => {
+        console.error(e)
+      })
     } catch (error) {
       console.error('Error fetching photos:', error);
     } finally {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 300);
+
     }
   };
 
   const handleQuery = (e) => {
+    e.preventDefault()
     setPhotos([])
     fetchPhotos()
   }
@@ -70,27 +82,29 @@ const Dashboard = () => {
               {pageTitle}
               <span className="highlight-text">Click</span>
             </h1>
-            <CRow>
-              <CCol md={11}>
-                <CFormInput
-                  autoComplete="off"
-                  className="main-search-bar"
-                  placeholder="Search Anything..."
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onFocusCapture={(e) => setQuery("")}
-                />
-              </CCol>
-              <CCol md={1}>
-                <CButton className='main-search-btn' onClick={handleQuery}> <CIcon icon={cilMagnifyingGlass} size='lg' />
-                </CButton>
-              </CCol>
-              <br />
-              <CCol md={12} className='text-center'>
-                <CButton className='main-search-btn-mobile'><CIcon icon={cilMagnifyingGlass} size='lg' />
-                </CButton>
-              </CCol>
-            </CRow>
+            <CForm onSubmit={handleQuery}>
+              <CRow>
+                <CCol md={11}>
+                  <CFormInput
+                    autoComplete="off"
+                    className="main-search-bar"
+                    placeholder="Search Anything..."
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    onFocusCapture={(e) => setQuery("")}
+                  />
+                </CCol>
+                <CCol md={1}>
+                  <CButton className='main-search-btn' onClick={handleQuery}> <CIcon icon={cilMagnifyingGlass} size='lg' />
+                  </CButton>
+                </CCol>
+                <br />
+                <CCol md={12} className='text-center'>
+                  <CButton className='main-search-btn-mobile'><CIcon icon={cilMagnifyingGlass} size='lg' />
+                  </CButton>
+                </CCol>
+              </CRow>
+            </CForm>
           </CRow>
           <br />
           <hr />
