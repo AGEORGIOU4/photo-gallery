@@ -4,11 +4,12 @@ import { CContainer, CSpinner } from '@coreui/react-pro'
 
 // routes config
 import routes from '../routes'
+import { CLoading } from 'src/common/CLoading'
 
 const AppContent = () => {
   return (
     <CContainer fluid>
-      <Suspense fallback={<CSpinner color="primary" />}>
+      <Suspense fallback={<CLoading />}>
         <Routes>
           {routes.map((route, idx) => {
             return (

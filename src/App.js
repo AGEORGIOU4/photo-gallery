@@ -8,6 +8,7 @@ import '@fontsource/montserrat/400-italic.css' // Specify weight and style
 import '@fontsource/dm-sans' // Defaults to weight 400
 import '@fontsource/dm-sans/400.css' // Specify weight
 import '@fontsource/dm-sans/400-italic.css' // Specify weight and style
+import { CLoading } from './common/CLoading'
 
 const loading = (
   <div className="pt-3 text-center">
@@ -31,7 +32,8 @@ class App extends Component {
   render() {
     return (
       <HashRouter>
-        <Suspense fallback={loading}>
+        <Suspense fallback={<CLoading />}>
+
           <Routes>
             <Route exact path="/login" name="Login Page" element={<Login />} />
             <Route exact path="/register" name="Register Page" element={<Register />} />

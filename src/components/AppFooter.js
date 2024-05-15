@@ -1,8 +1,8 @@
 import React from 'react'
 import { CButtonGroup, CFooter, CFormCheck } from '@coreui/react-pro'
+import { useDispatch, useSelector } from 'react-redux'
 import CIcon from '@coreui/icons-react'
 import { cilMoon, cilSun } from '@coreui/icons'
-import { useDispatch, useSelector } from 'react-redux'
 
 const AppFooter = () => {
   const dispatch = useDispatch()
@@ -13,7 +13,7 @@ const AppFooter = () => {
 
   return (
     <CFooter>
-      {/* <div>
+      <div>
         <CButtonGroup aria-label="Theme switch">
           <CFormCheck
             type="radio"
@@ -36,7 +36,7 @@ const AppFooter = () => {
             onChange={() => dispatch({ type: 'set', theme: 'dark' })}
           />
         </CButtonGroup>
-      </div> */}
+      </div>
       <div className="ms-auto">
         <span className="me-1">Created by</span>
         <a href="https://www.linkedin.com/in/ageorgiou4/" target="_blank" rel="noopener noreferrer">

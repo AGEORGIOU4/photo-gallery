@@ -35,7 +35,11 @@ const AppHeader = () => {
     }
   }, [])
 
-  const [rotation, setRotation] = useState(135)
+  useEffect(() => {
+    setRotation(sidebarShow ? 135 : 0)
+  }, [sidebarShow])
+
+  const [rotation, setRotation] = useState(0)
 
   const toggleRotation = () => {
     // Calculate the new rotation value based on the current rotation
@@ -54,7 +58,7 @@ const AppHeader = () => {
             onClick={toggleRotation}
             src="logo.png"
             id="header-logo"
-            height={120}
+            height={80}
             alt="Logo"
             style={{ transform: `rotate(${rotation}deg)` }}
           />
