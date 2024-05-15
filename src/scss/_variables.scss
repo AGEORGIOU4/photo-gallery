@@ -117,27 +117,26 @@
 // fusv-enable
 
 // scss-docs-start theme-color-variables
-// $primary:       $primary-base !default;
-// $secondary:     $secondary-base !default;
-// $success:       $success-base !default;
-// $info:          $info-base !default;
-// $warning:       $warning-base !default;
-// $danger:        $danger-base !default;
-// $light:         $light-base !default;
-// $dark:          $dark-base !default;
+$primary: #01AAB1;
+$secondary: #4E5156;
+$success: #23b85c;
+$info: #3399ff;
+$warning: #f9b115;
+$danger: #e55353;
+$light: #dcdde2;
+$dark: #414141;
 // scss-docs-end theme-color-variables
 
 // scss-docs-start theme-colors-map
-// $theme-colors: (
-//   "primary":    $primary,
-//   "secondary":  $secondary,
-//   "success":    $success,
-//   "info":       $info,
-//   "warning":    $warning,
-//   "danger":     $danger,
-//   "light":      $light,
-//   "dark":       $dark
-// ) !default;
+$theme-colors: (
+  "primary": #01AAB1,
+  "secondary": #4E5156,
+  "success": #23b85c,
+  "info": #3399ff,
+  "warning": #f9b115,
+  "danger": #e55353,
+  "light": #dcdde2,
+  "dark": #414141) !default;
 // scss-docs-end theme-colors-map
 
 // The contrast ratio to reach against white, to determine if color changes from "light" to "dark". Acceptable values for WCAG 2.0 are 3, 4.5 and 7.
@@ -477,7 +476,7 @@
 // $font-family-sans-serif:      system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 // $font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 // stylelint-enable value-keyword-case
-// $font-family-base:            var(--#{$variable-prefix}font-sans-serif) !default;
+$font-family-base: "DM Sans";
 // $font-family-code:            var(--#{$variable-prefix}font-monospace) !default;
 
 // $font-size-root effects the value of `rem`, which is used for as well font sizes, paddings and margins
@@ -522,11 +521,11 @@
 
 // scss-docs-start headings-variables
 // $headings-margin-bottom:      $spacer / 2 !default;
-// $headings-font-family:        null !default;
+$headings-font-family: "Montserrat";
 // $headings-font-style:         null !default;
 // $headings-font-weight:        500 !default;
 // $headings-line-height:        1.2 !default;
-// $headings-color:              unset !default;
+$headings-color: #fff;
 // scss-docs-end headings-variables
 
 // scss-docs-start display-headings
@@ -568,7 +567,7 @@
 // $blockquote-footer-font-size:   $small-font-size !default;
 
 // $hr-margin-y:                   $spacer !default;
-// $hr-color:                      inherit !default;
+$hr-color: #fff;
 // $hr-height:                     $border-width !default;
 // $hr-opacity:                    .25 !default;
 
@@ -799,7 +798,7 @@
 // $input-border-width:                    $input-btn-border-width !default;
 // $input-box-shadow:                      $box-shadow-inset !default;
 
-// $input-border-radius:                   $border-radius !default;
+$input-border-radius: 50px;
 // $input-border-radius-sm:                $border-radius-sm !default;
 // $input-border-radius-lg:                $border-radius-lg !default;
 

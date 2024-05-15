@@ -1,1 +1,92 @@
-// Here you can add other styles
+body {
+  min-height: '100vh';
+}
+
+.back-photo {
+  background: url("../assets/bg-2.jpg");
+  width: 100%;
+  top: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.header {
+  width: 100%;
+  background: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.scrolled {
+  background-color: #ffffff;
+}
+
+
+#header-logo {
+  transition: transform 0.3s ease;
+}
+
+#header-logo:hover {
+  transform: scale(1.5);
+}
+
+.home-container {
+  height: 50vh;
+  display: grid;
+  align-items: center;
+}
+
+.main-search-bar {
+  padding: 1.375rem 2.75rem;
+  font-size: x-large;
+  background-color: #0000000f;
+  backdrop-filter: blur(30px);
+  transition: background-color 0.3s ease;
+  border: none;
+  font-family: 'Montserrat';
+  font-weight: 400;
+}
+
+.main-search-bar:focus {
+  background-color: #0000000f;
+  backdrop-filter: blur(30px);
+  transition: background-color 0.3s ease;
+  font-family: 'Montserrat';
+  font-weight: 400;
+}
+
+.main-search-bar::placeholder {
+  color: #e9e9e9;
+  font-family: 'Montserrat';
+  /* Adjust placeholder color */
+}
+
+.typewriter {
+  overflow: hidden;
+  border-right: 0.08em solid orange;
+  white-space: normal;
+  margin: 6rem auto;
+  letter-spacing: 0.15em;
+  font-size: 2.5em;
+}
+
+.highlight-text {
+  font-weight: 900;
+  font-size: -webkit-xxx-large;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .typewriter {
+    font-size: 1.2em;
+  }
+
+  .highlight-text {
+    font-weight: 900;
+    font-size: larger;
+  }
+
+  .main-search-bar {
+    padding: 1rem 2rem;
+    font-size: large;
+  }
+}

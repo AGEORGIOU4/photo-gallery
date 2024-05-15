@@ -45,7 +45,7 @@ const AppAside = () => {
       colorScheme="light"
       size="lg"
       overlaid
-      placement="end"
+      placement="start"
       visible={asideShow}
       onVisibleChange={(visible) => {
         dispatch({ type: 'set', asideShow: visible })
