@@ -8,6 +8,17 @@ body {
   position: fixed;
 }
 
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: white;
+  pointer-events: auto;
+  background-color: transparent;
+  box-shadow: none !important
+}
+
 .back-photo {
   background-image: url("../assets/bg-2.jpg");
   background-size: cover;
@@ -141,6 +152,7 @@ body {
 
   .typewriter {
     font-size: 1.2em;
+    margin: 2rem auto;
   }
 
   .highlight-text {

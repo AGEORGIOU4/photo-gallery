@@ -14,7 +14,7 @@ const AppFooter = () => {
   return (
     <CFooter>
       <div>
-        <CButtonGroup aria-label="Theme switch">
+        {/* <CButtonGroup aria-label="Theme switch">
           <CFormCheck
             type="radio"
             button={{ color: 'primary' }}
@@ -35,7 +35,7 @@ const AppFooter = () => {
             checked={theme === 'dark'}
             onChange={() => dispatch({ type: 'set', theme: 'dark' })}
           />
-        </CButtonGroup>
+        </CButtonGroup> */}
       </div>
       <div className="ms-auto">
         <span className="me-1">Created by</span>

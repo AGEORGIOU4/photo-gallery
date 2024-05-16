@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { CSidebar, CSidebarNav, CSidebarToggler } from '@coreui/react-pro'
+import { CSidebar, CSidebarNav } from '@coreui/react-pro'
 import { AppSidebarNav } from './AppSidebarNav'
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'

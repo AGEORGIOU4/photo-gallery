@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { CButton, CCol, CContainer, CForm, CFormInput, CLoadingButton, CModal, CModalBody, CModalHeader, CModalTitle, CPagination, CPaginationItem, CRow, CToast } from '@coreui/react-pro';
+import React, { useEffect, useState } from 'react';
+import { CButton, CCol, CContainer, CForm, CFormInput, CRow, } from '@coreui/react-pro';
 import unsplashLogo from '../../assets/images/other/unsplash_logo.png';
 import { SearchResults } from './Search/SearchResults';
 import CIcon from '@coreui/icons-react';
@@ -27,6 +27,16 @@ const Dashboard = () => {
     setSelectedPhoto(e.target.dataset)
     setVisible(!visible)
   }
+
+  const handleScroll = () => {
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    if (scrollTop + clientHeight >= scrollHeight) {
+      // User has scrolled to the bottom of the page
+      if (page < totalPages) {
+        setPage(page + 1);
+      }
+    }
+  };
 
   const fetchPhotos = async () => {
     setLoading(true);
@@ -63,20 +73,12 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight
-      ) {
-        if (page < totalPages) {
-          setPage(page + 1);
-        }
-      }
-    };
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [page, totalPages]);
+  }, [page, totalPages]); // Include page and totalPages in the dependency array
+
 
   useEffect(() => {
     fetchPhotos();
@@ -88,7 +90,6 @@ const Dashboard = () => {
         <CContainer>
           {/* Modal */}
           <CLightbox setVisible={setVisible} visible={visible} data={selectedPhoto} />
-
           {/* Section 1 - Title & Search Bar */}
           <CRow className="text-center">
             <h1 className="typewriter">
@@ -123,13 +124,19 @@ const Dashboard = () => {
           <hr />
           {/* Section 2 - Search Results */}
           <div style={{ opacity: loading ? 0.4 : 1 }}>
-            <CRow className="d-flex justify-content-center unsplash-div">
-              <h6 style={{ fontFamily: 'Arial, sans-serif', fontWeight: 'bold', color: '#333' }}>
-                <span>Powered by</span>
-                <img src={unsplashLogo} height={80} alt="Unsplash Logo" className="ms-3 me-3" />
-              </h6>
-              <SearchResults photos={photos} handleClick={handleClick} />
-            </CRow>
+            {totalPages > 0 &&
+              <CRow className="d-flex justify-content-center unsplash-div">
+                <h6 style={{ fontFamily: 'Arial, sans-serif', fontWeight: 'bold', color: '#333' }}>
+                  <span>Powered by</span>
+                  <img src={unsplashLogo} height={80} alt="Unsplash Logo" className="ms-3 me-3" />
+                </h6>
+                <SearchResults photos={photos} handleClick={handleClick} />
+              </CRow>
+            }
+            <div className='text-center'>
+              <br />
+              {totalPages === 0 && <h1><strong>No items found</strong></h1>}
+            </div>
           </div>
           <br />
         </CContainer>

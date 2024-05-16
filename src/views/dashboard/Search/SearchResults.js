@@ -8,7 +8,7 @@ export const SearchResults = (props) => {
     <>
       <CRow xs={{ cols: 1 }} md={{ cols: 5 }} className="g-4" style={{ placeContent: 'center' }}>
         {props.photos?.map((photo, index) => {
-          console.log(photo)
+          // console.log(index)
           return (
             <CPhoto
               key={index}

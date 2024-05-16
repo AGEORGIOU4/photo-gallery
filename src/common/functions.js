@@ -27,25 +27,6 @@ export const FormatTimestampDateTime = (props) => {
   return formattedDate;
 }
 
-export function FormatTimestampFunction(date) {
-  var date = new Date(date);
-  var setDate = (date.getDate() < 10) ? '0' + date.getDate() : date.getDate();
-  var incrementMonth = date.getMonth() + 1;
-  var setMonth = (incrementMonth) < 10 ? '0' + incrementMonth : incrementMonth;
-
-  var formattedDate = date.getFullYear() + '-' + setMonth + '-' + setDate;
-
-  return formattedDate;
-}
-
-export function FormatTimestampFunction2(date) {
-  var date = new Date(date);
-  var setMonth = date.getMonth() + 1;
-  var formattedDate = date.getDate() + '/' + setMonth + '/' + date.getFullYear();
-
-  return formattedDate;
-}
-
 export function formatDate(date) {
   return date.toISOString().split('T')[0]; // Extracts YYYY-MM-DD
 }

@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { CModal, CModalHeader, CModalTitle, CModalBody, CRow, CCol } from '@coreui/react-pro';
-import { FormatTimestamp, FormatTimestampDateTime, FormatTimestampWithDate } from 'src/common/functions';
+import { CModal, CModalHeader, CModalBody, CRow, CCol } from '@coreui/react-pro';
+import { FormatTimestampDateTime, } from 'src/common/functions';
 
 const CLightBox = ({ visible, setVisible, data }) => {
-  const [loading, setLoading] = useState(true);
-  console.log(data)
   return (
     <CModal size="xl" visible={visible} onClose={() => setVisible(false)} aria-labelledby="OptionalSizesExample2">
       <CModalHeader closeButton>
