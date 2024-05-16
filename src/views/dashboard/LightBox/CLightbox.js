@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CModal, CModalHeader, CModalBody, CRow, CCol, CButton } from '@coreui/react-pro';
 import { FormatTimestampDateTime, } from 'src/common/functions';
+import CIcon from '@coreui/icons-react';
+import { cilSave } from '@coreui/icons';
 
 const CLightBox = ({ visible, setVisible, data }) => {
   return (
@@ -22,7 +24,9 @@ const CLightBox = ({ visible, setVisible, data }) => {
             <p><strong>Alt:</strong> {data?.alt_description}</p>
             <p><strong>Created at:</strong> <FormatTimestampDateTime date={data?.createdAt} /></p>
             <p><strong>Source:</strong> <a href={data?.srcRegular}>Link</a></p>
-            <CButton>Download</CButton>
+            <hr />
+            <CButton style={{ width: '100%' }}>Save <CIcon icon={cilSave} /></CButton>
+            <hr />
           </CCol>
         </CRow>
 

@@ -85,8 +85,8 @@ const Dashboard = () => {
           if (result && result.synonyms) {
             // Select 5 random synonyms
             let synonyms = result.synonyms;
-            if (synonyms.length > 5) {
-              synonyms = synonyms.slice(0, 5);
+            if (synonyms.length > 6) {
+              synonyms = synonyms.slice(0, 6);
             }
 
             setTimeout(() => {
@@ -192,7 +192,7 @@ const Dashboard = () => {
           <div style={{ opacity: loading ? 0.4 : 1 }}>
             {totalPages > 0 &&
               <CRow className="d-flex justify-content-center ">
-                <CCol md={10} style={{ display: 'flex', alignItems: 'center' }}>
+                <CCol className='suggestions-section' md={10} style={{ display: 'flex', alignItems: 'center' }}>
                   <span
                     className={aiLoading ? 'blink' : ''}
                     style={{
@@ -201,7 +201,7 @@ const Dashboard = () => {
                       color: '#673ab7',
                     }}
                   >
-                    <CImage src={'/ai_star.png'} style={{ width: '30px', marginRight: '10px' }} />
+                    <CImage src={'/ai_star.png'} style={{ width: '30px', marginRight: '10px', marginBottom: '20px' }} />
                     AI assistant suggests:
                   </span>
                   <div style={{ display: 'flex', flexWrap: 'wrap', marginLeft: '10px' }}>
@@ -242,7 +242,6 @@ const Dashboard = () => {
               {totalPages === 0 && <h1><strong>No items found</strong></h1>}
             </div>
           </div>
-
           <br />
         </CContainer>
       </div >

@@ -7,7 +7,7 @@ const DefaultLayout = () => {
 
   // Function to check if the user is on the profile page
   const isProfilePage = () => {
-    return location.pathname === '/profile'; // Change '/profile' to your actual profile page path
+    return location.pathname === '/profile' || location.pathname === '/analytics'; // Change '/profile' to your actual profile page path
   };
 
   return (

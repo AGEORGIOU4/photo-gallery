@@ -1,12 +1,13 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
 import {
+  cibGoogleAnalytics,
   cilHome,
   cilSpeedometer,
   cilStar,
   cilUser,
 } from '@coreui/icons'
-import { CNavGroup, CNavItem } from '@coreui/react-pro'
+import { CNavItem } from '@coreui/react-pro'
 
 const _nav = [
   {
@@ -23,9 +24,9 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'Recommendations',
-    to: '/recommendations',
-    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+    name: 'Analytics',
+    to: '/analytics',
+    icon: <CIcon icon={cibGoogleAnalytics} customClassName="nav-icon" />,
   },
 ]
 
