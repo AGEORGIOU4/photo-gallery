@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'; // Import PropTypes for prop validation
 import { CCard, CCardImage, CCol, CTooltip } from '@coreui/react-pro';
 
 const CPhoto = (props) => {
-  const [showAuthor, setShowAuthor] = useState(false);
-  console.log(showAuthor)
   return (
     <>
       <CCol xs>
@@ -14,11 +12,19 @@ const CPhoto = (props) => {
             placement="top"
           >
             <CCardImage
+              id={props.id}
+              data-id={props.id}
+              data-author={props.author}
+
+              data-title={props.title}
+              data-description={props.description}
+              data-alt_description={props.alt_description}
+              data-src-regular={props.regular}
+              data-created-at={props.created_at}
               orientation="top"
               src={props.src}
               className='result-image'
-              onMouseOver={() => setShowAuthor(true)}
-              onMouseOut={() => setShowAuthor(true)}
+              onClick={props.handleClick}
             />
           </CTooltip>
         </CCard>
@@ -29,9 +35,15 @@ const CPhoto = (props) => {
 
 // Prop validation
 CPhoto.propTypes = {
+  id: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  alt_description: PropTypes.string,
+  regular: PropTypes.string,
+  created_at: PropTypes.string,
+  handleClick: PropTypes.func,
 };
 
 export default CPhoto;

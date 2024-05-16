@@ -8,8 +8,20 @@ export const SearchResults = (props) => {
     <>
       <CRow xs={{ cols: 1 }} md={{ cols: 5 }} className="g-4" style={{ placeContent: 'center' }}>
         {props.photos?.map((photo, index) => {
+          console.log(photo)
           return (
-            <CPhoto key={index} src={photo.urls?.thumb} author={photo.user?.name} width={photo.width} height={photo.height} />
+            <CPhoto
+              key={index}
+              id={photo?.id}
+              src={photo.urls?.thumb}
+              author={photo.user?.name}
+              title={photo.title || ""}
+              description={photo.description || ""}
+              alt_description={photo.alt_description || ""}
+              regular={photo.urls?.regular || ""}
+              created_at={photo?.created_at || ""}
+              handleClick={props.handleClick}
+            />
           );
         })}
       </CRow>
@@ -20,8 +32,10 @@ export const SearchResults = (props) => {
 
 // Prop validation
 SearchResults.propTypes = {
+  handleClick: PropTypes.func,
   photos: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.string,
       urls: PropTypes.object,
       user: PropTypes.object,
       title: PropTypes.string,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { CButton, CCol, CContainer, CForm, CFormInput, CLoadingButton, CPagination, CPaginationItem, CRow, CToast } from '@coreui/react-pro';
+import { CButton, CCol, CContainer, CForm, CFormInput, CLoadingButton, CModal, CModalBody, CModalHeader, CModalTitle, CPagination, CPaginationItem, CRow, CToast } from '@coreui/react-pro';
 import unsplashLogo from '../../assets/images/other/unsplash_logo.png';
 import { SearchResults } from './Search/SearchResults';
 import CIcon from '@coreui/icons-react';
@@ -7,9 +7,12 @@ import { cilMagnifyingGlass } from '@coreui/icons';
 import { unsplash_url } from 'src/common/urls';
 import { restApiGet } from 'src/common/apis';
 import { typewriterEffect } from './helpers';
+import CLightbox from './LightBox/CLightbox';
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
+  const [visible, setVisible] = useState(false)
+
   const [pageTitle, setText] = useState('');
 
   const [query, setQuery] = useState('Random');
@@ -17,6 +20,13 @@ const Dashboard = () => {
 
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+
+  const [selectedPhoto, setSelectedPhoto] = useState({});
+
+  const handleClick = (e) => {
+    setSelectedPhoto(e.target.dataset)
+    setVisible(!visible)
+  }
 
   const fetchPhotos = async () => {
     setLoading(true);
@@ -76,6 +86,9 @@ const Dashboard = () => {
     <CContainer fluid className="home-container">
       <div className="d-flex flex-row align-items-center">
         <CContainer>
+          {/* Modal */}
+          <CLightbox setVisible={setVisible} visible={visible} data={selectedPhoto} />
+
           {/* Section 1 - Title & Search Bar */}
           <CRow className="text-center">
             <h1 className="typewriter">
@@ -115,7 +128,7 @@ const Dashboard = () => {
                 <span>Powered by</span>
                 <img src={unsplashLogo} height={80} alt="Unsplash Logo" className="ms-3 me-3" />
               </h6>
-              <SearchResults photos={photos} />
+              <SearchResults photos={photos} handleClick={handleClick} />
             </CRow>
           </div>
           <br />
