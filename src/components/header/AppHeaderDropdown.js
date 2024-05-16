@@ -1,46 +1,48 @@
 import React from 'react'
-import {
-  CAvatar,
-  CBadge,
-  CDropdown,
-  CDropdownDivider,
-  CDropdownHeader,
-  CDropdownItem,
-  CDropdownMenu,
-  CDropdownToggle,
-} from '@coreui/react-pro'
-import {
-  cilBell,
-  cilCreditCard,
-  cilCommentSquare,
-  cilEnvelopeOpen,
-  cilFile,
-  cilLockLocked,
-  cilSettings,
-  cilTask,
-  cilUser,
-} from '@coreui/icons'
-import CIcon from '@coreui/icons-react'
-
-import avatar8 from './../../assets/images/avatars/8.jpg'
+import { CAvatar, CDropdown, CDropdownDivider, CDropdownHeader, CDropdownItem, CDropdownMenu, CDropdownToggle, CSpinner } from '@coreui/react-pro'
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from './LoginButton';
+import CIcon from '@coreui/icons-react';
+import { cilArrowCircleLeft, cilArrowCircleRight, cilUser } from '@coreui/icons';
+import avatar from "../../assets/images/avatars/avatar.png"
 
 const AppHeaderDropdown = () => {
+  const { user, isAuthenticated, isLoading, loginWithRedirect, logout } = useAuth0();
+
   return (
-    <CDropdown variant="nav-item" alignment="end">
-      <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
-        <CAvatar src={avatar8} size="md" />
-      </CDropdownToggle>
-      <CDropdownMenu className="pt-0">
-        <CDropdownHeader className="bg-light dark:bg-white dark:bg-opacity-10 fw-semibold py-2">
-          Account
-        </CDropdownHeader>
-        <CDropdownItem href="#">
-          <CIcon icon={cilUser} className="me-2" />
-          Profile
-        </CDropdownItem>
-      </CDropdownMenu>
-    </CDropdown>
+    <div>
+      <div style={{ display: isLoading ? "block" : "none", padding: "0 1.13rem" }}>
+        <CSpinner color="primary" />
+      </div>
+
+      <div style={{ display: !isLoading ? "block" : "none" }}>
+        {!isAuthenticated && <LoginButton />}
+        {isAuthenticated &&
+          <CDropdown variant="nav-item" alignment="end">
+            <CDropdownToggle placement="bottom-end" className="py-0" caret={true}>
+              <CAvatar src={(isAuthenticated) ? user.picture : avatar} size="md" />
+            </CDropdownToggle>
+            <CDropdownMenu className="pt-0">
+              <CDropdownHeader className="bg-light fw-semibold py-2">Account</CDropdownHeader>
+              <CDropdownItem href="#/profile">
+                <CIcon icon={cilUser} className="me-2" />
+                Profile
+              </CDropdownItem>
+              <CDropdownDivider />
+              <CDropdownItem onClick={() => loginWithRedirect()} style={{ display: !isAuthenticated ? "block" : "none" }}>
+                <CIcon icon={cilArrowCircleRight} className="me-2" />
+                Login
+              </CDropdownItem>
+              <CDropdownItem onClick={() => logout()} style={{ display: isAuthenticated ? "block" : "none" }}>
+                <CIcon icon={cilArrowCircleLeft} className="me-2" />
+                Logout
+              </CDropdownItem>
+            </CDropdownMenu>
+          </CDropdown>}
+      </div>
+    </div>
   )
 }
+
 
 export default AppHeaderDropdown

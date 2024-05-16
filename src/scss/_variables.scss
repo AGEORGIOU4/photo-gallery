@@ -120,7 +120,7 @@
 $primary: #01AAB1;
 $secondary: #4E5156;
 $success: #23b85c;
-$info: #3399ff;
+$info: #e91e63;
 $warning: #f9b115;
 $danger: #e55353;
 $light: #dcdde2;
@@ -132,7 +132,7 @@ $theme-colors: (
   "primary": #01AAB1,
   "secondary": #4E5156,
   "success": #23b85c,
-  "info": #3399ff,
+  "info": #e91e63,
   "warning": #f9b115,
   "danger": #e55353,
   "light": #dcdde2,
@@ -1319,11 +1319,11 @@ $input-border-radius: 50px;
 
 // Badges
 // scss-docs-start badge-variables
-// $badge-font-size:                   .75em !default;
+$badge-font-size: 1.1em;
 // $badge-font-weight:                 $font-weight-bold !default;
 // $badge-color:                       $high-emphasis-inverse !default;
-// $badge-padding-y:                   .35em !default;
-// $badge-padding-x:                   .65em !default;
+$badge-padding-y: 0.8em;
+$badge-padding-x: 2.65em;
 // $badge-border-radius:               $border-radius !default;
 // scss-docs-end badge-variables
 

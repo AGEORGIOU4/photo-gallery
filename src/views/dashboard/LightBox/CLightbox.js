@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CModal, CModalHeader, CModalBody, CRow, CCol } from '@coreui/react-pro';
+import { CModal, CModalHeader, CModalBody, CRow, CCol, CButton } from '@coreui/react-pro';
 import { FormatTimestampDateTime, } from 'src/common/functions';
 
 const CLightBox = ({ visible, setVisible, data }) => {
@@ -11,19 +11,18 @@ const CLightBox = ({ visible, setVisible, data }) => {
       </CModalHeader>
       <CModalBody>
         {/* Render your image and description here */}
-        <img className='lightbox-image' src={data?.srcRegular || ""} alt={data?.alt_description || ""} />
-        <br />
-        <br />
         <CRow>
-          <CCol md={6}>
+          <CCol md={8} style={{ marginBottom: '20px' }}>
+            <img className='lightbox-image' src={data?.srcRegular || ""} alt={data?.alt_description || ""} />
+          </CCol>
+          <CCol md={4}>
             <p><strong>Author:</strong> {data?.author}</p>
             <p><strong>ID:</strong> {data?.id}</p>
             <p><strong>Description:</strong> {data?.description}</p>
-          </CCol>
-          <CCol md={6}>
             <p><strong>Alt:</strong> {data?.alt_description}</p>
             <p><strong>Created at:</strong> <FormatTimestampDateTime date={data?.createdAt} /></p>
             <p><strong>Source:</strong> <a href={data?.srcRegular}>Link</a></p>
+            <CButton>Download</CButton>
           </CCol>
         </CRow>
 

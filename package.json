@@ -25,6 +25,7 @@
     "coreui_library_short_version": "4.1"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.2.4",
     "@coreui/chartjs": "^3.0.0",
     "@coreui/coreui-pro": "^4.1.2",
     "@coreui/icons": "^2.1.0",
