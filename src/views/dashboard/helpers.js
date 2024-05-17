@@ -10,3 +10,13 @@ export const typewriterEffect = (text, setText, intervalTime = 100) => {
   }, intervalTime);
   return () => clearInterval(interval);
 };
+
+export const getColumnCount = (width) => {
+  if (width < 850) {
+    return 3;
+  } else if (width < 1000) {
+    return 4;
+  } else {
+    return 5;
+  }
+};

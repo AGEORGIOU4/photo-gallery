@@ -2,12 +2,6 @@ body {
   min-height: '100vh';
 }
 
-.footer {
-  width: 100%;
-  bottom: 0;
-  position: fixed;
-}
-
 .modal-content {
   position: relative;
   display: flex;
@@ -65,8 +59,8 @@ body {
 }
 
 .main-search-bar {
-  padding: 1.375rem 2.75rem;
-  font-size: x-large;
+  padding: 0.75rem 2.05rem;
+  font-size: large;
   background-color: #0000000f;
   backdrop-filter: blur(30px);
   border: none;
@@ -109,7 +103,7 @@ body {
   overflow: hidden;
   border-right: 0.08em solid orange;
   white-space: normal;
-  margin: 4rem auto;
+  margin: 3rem auto;
   letter-spacing: 0.15em;
   font-size: 2.5em;
 }
@@ -156,7 +150,8 @@ body {
 }
 
 .result-image {
-  width: auto;
+  width: 100%;
+  border-radius: 3%;
   height: 9rem;
   object-fit: cover;
   cursor: pointer;
@@ -164,7 +159,6 @@ body {
 }
 
 .result-image:hover {
-  opacity: 0.6;
   transform: scale(1.1);
 }
 
@@ -183,8 +177,67 @@ body {
   color: #414141;
 }
 
-/* Media query for smaller screens */
-@media (max-width: 768px) {
+
+.suggestions-badges {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 10px;
+}
+
+
+.swiper-card {
+  width: 100%;
+  border-radius: 5px;
+  height: 10rem;
+  object-fit: cover;
+  cursor: pointer;
+  transition: scale 0.3s ease;
+}
+
+
+/* Add this CSS to your stylesheet */
+.result-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: auto;
+  width: 100%;
+  opacity: 0;
+  border-radius: 3%;
+  transition: .5s ease;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+.result-image-container:hover .overlay {
+  opacity: 1;
+
+}
+
+.result-image-container:hover .result-image {
+  transform: scale(1.1);
+}
+
+.profile-picture {
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 4px;
+}
+
+
+
+// MOBILE SCREEN //
+
+@media (max-width: 767px) {
   .back-photo {
     background: url("../assets/bg-2-mobile.jpg");
     background-size: cover;
@@ -234,6 +287,11 @@ body {
     width: 100%;
     padding: 1rem 2rem;
     transition: background-color 0.3s ease;
+
+  }
+
+  .suggestions-badges {
+    display: ruby-text;
 
   }
 }

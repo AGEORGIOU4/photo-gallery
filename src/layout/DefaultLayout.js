@@ -1,15 +1,7 @@
 import React from 'react'
-import { AppAside, AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
-import { useLocation } from 'react-router-dom';
+import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 const DefaultLayout = () => {
-  const location = useLocation();
-
-  // Function to check if the user is on the profile page
-  const isProfilePage = () => {
-    return location.pathname === '/profile' || location.pathname === '/analytics'; // Change '/profile' to your actual profile page path
-  };
-
   return (
     <>
       <AppSidebar />
@@ -24,7 +16,6 @@ const DefaultLayout = () => {
         <br />
         <AppFooter />
       </div>
-      <AppAside />
     </>
   )
 }

@@ -20,7 +20,7 @@ const AppHeaderDropdown = () => {
         {isAuthenticated &&
           <CDropdown variant="nav-item" alignment="end">
             <CDropdownToggle placement="bottom-end" className="py-0" caret={true}>
-              <CAvatar src={(isAuthenticated) ? user.picture : avatar} size="md" />
+              <CAvatar status={'success'} referrerPolicy="no-referrer" shape='rounded-end' src={(isAuthenticated) ? user.picture : avatar} size="md" />
             </CDropdownToggle>
             <CDropdownMenu className="pt-0">
               <CDropdownHeader className="bg-light fw-semibold py-2">Account</CDropdownHeader>

@@ -1,35 +1,55 @@
-import React, { } from 'react';
-import PropTypes from 'prop-types'; // Import PropTypes for prop validation
-import { CCard, CCardImage, CCol, CTooltip } from '@coreui/react-pro';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { CCol, CImage, CRow } from '@coreui/react-pro';
 
 const CPhoto = (props) => {
-  return (
-    <>
-      <CCol xs>
-        <CCard className="h-100">
-          <CTooltip
-            content={props.author}
-            placement="top"
-          >
-            <CCardImage
-              id={props.id}
-              data-id={props.id}
-              data-author={props.author}
+  const {
+    id,
+    src,
+    author,
+    title,
+    description,
+    alt_description,
+    regular,
+    created_at,
+    user,
+    handleClick
+  } = props;
 
-              data-title={props.title}
-              data-description={props.description}
-              data-alt_description={props.alt_description}
-              data-src-regular={props.regular}
-              data-created-at={props.created_at}
-              orientation="top"
-              src={props.src}
-              className='result-image'
-              onClick={props.handleClick}
+  const commonProps = {
+    id,
+    'data-id': id,
+    'data-author': author,
+    'data-title': title,
+    'data-description': description,
+    'data-alt_description': alt_description,
+    'data-src-regular': regular,
+    'data-created-at': created_at,
+    'data-user': JSON.stringify(user),
+    onClick: handleClick,
+  };
+
+  return (
+    <CCol xs  {...commonProps}>
+      <div className="result-image-container" {...commonProps}>
+        <CImage
+          {...commonProps}
+          src={src}
+          className='result-image'
+        />
+        <div className="overlay" {...commonProps}>
+          <div style={{ display: 'flex', alignItems: 'center', padding: '0.4rem' }}  {...commonProps}>
+            <CImage
+              src={user?.profile_image?.small || ""}
+              alt={author}
+              className="profile-picture"
+              {...commonProps}
             />
-          </CTooltip>
-        </CCard>
-      </CCol>
-    </>
+            <span style={{ fontSize: 'x-small', marginLeft: '0.5rem' }} {...commonProps}>{user?.username || ""}</span>
+          </div>
+        </div>
+      </div>
+    </CCol>
   );
 };
 
@@ -43,7 +63,8 @@ CPhoto.propTypes = {
   alt_description: PropTypes.string,
   regular: PropTypes.string,
   created_at: PropTypes.string,
-  handleClick: PropTypes.func,
+  user: PropTypes.object,
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default CPhoto;
