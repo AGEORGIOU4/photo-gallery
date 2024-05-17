@@ -4,7 +4,7 @@ import unsplashLogo from '../../assets/images/other/unsplash_logo.png';
 import { SearchResults } from './Search/SearchResults';
 import CIcon from '@coreui/icons-react';
 import { cilMagnifyingGlass } from '@coreui/icons';
-import { api_ninjas_url, unsplash_url } from 'src/common/urls';
+import { api_ninjas_url, unsplash_url, word_associations_url } from 'src/common/urls';
 import { restApiGet } from 'src/common/apis';
 import { typewriterEffect } from './helpers';
 import CLightbox from './LightBox/CLightbox';
@@ -26,7 +26,7 @@ const Dashboard = () => {
 
   const [selectedPhoto, setSelectedPhoto] = useState({});
 
-  const [synonyms, setSynonyms] = useState([]);
+  const [associations, setAssociations] = useState([]);
 
   const handleClick = (e) => {
     setSelectedPhoto(e.target.dataset)
@@ -56,7 +56,7 @@ const Dashboard = () => {
           setPhotos(prevPhotos => [...prevPhotos, ...result?.results]);
           setTotalPages(result?.total_pages || 0);
         } else {
-          alert("Oops. You have reached the rate limit!")
+          alert("Oops. Something went wrong!")
           window.location.reload()
         }
       }).catch((e) => {
@@ -72,39 +72,30 @@ const Dashboard = () => {
     }
   };
 
-  const fetchSynonyms = async () => {
+  const fetchAssociations = async () => {
     setAILoading(true)
     let word = query || "random";
-    const headers = {
-      'X-Api-Key': 'kCVCZGwLehNyuXnhL1PdH2JPufffPCbyhBuziiGs',
-    };
+    let tmp_items = []
 
     try {
-      await restApiGet(`${api_ninjas_url}?word=${word}`, headers)
+      await restApiGet(`${word_associations_url}/search?apikey=${process.env.REACT_APP_WORD_ASSOCIATIONS_KEY}&text=${word}&lang=en&type=stimulus&limit=5`)
         .then((result) => {
-          if (result && result.synonyms) {
-            // Select 5 random synonyms
-            let synonyms = result.synonyms;
-            if (synonyms.length > 6) {
-              synonyms = synonyms.slice(0, 6);
-            }
-
-            setTimeout(() => {
-              setSynonyms(synonyms);
-              setAILoading(false)
-            }, 1800);
-
+          if (result && result?.response) {
+            tmp_items = result.response[0].items || []
           }
         })
         .catch((e) => {
           console.error(e);
         });
     } catch (error) {
-      console.error('Error fetching synonyms:', error);
+      console.error('Error fetching assocation:', error);
     } finally {
+      const loader = Math.floor(Math.random() * (2500 - 300 + 1)) + 300;
+      console.log(loader)
       setTimeout(() => {
         setAILoading(false)
-      }, 1800);
+        setAssociations(tmp_items)
+      }, loader);
     }
   };
 
@@ -112,16 +103,16 @@ const Dashboard = () => {
     e.preventDefault()
     setPhotos([])
     fetchPhotos()
-    setSynonyms([])
-    fetchSynonyms()
+    setAssociations([])
+    fetchAssociations()
   }
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
     setPhotos([])
     fetchPhotos(true)
-    setSynonyms([])
-    fetchSynonyms()
+    setAssociations([])
+    fetchAssociations()
   }
 
   const handleBadgeClick = (e) => {
@@ -147,7 +138,7 @@ const Dashboard = () => {
   }, [page]);
 
   useEffect(() => {
-    fetchSynonyms();
+    fetchAssociations()
   }, []);
 
   return (
@@ -164,7 +155,7 @@ const Dashboard = () => {
             </h1>
             <CForm onSubmit={handleFormSubmit}>
               <CRow>
-                <CCol md={11}>
+                <CCol lg={11} md={10}>
                   <CFormInput
                     autoComplete="off"
                     className="main-search-bar"
@@ -174,13 +165,13 @@ const Dashboard = () => {
                     onFocusCapture={(e) => setQuery("")}
                   />
                 </CCol>
-                <CCol md={1}>
-                  <CButton className='main-search-btn' onClick={handleFormSubmit}> <CIcon icon={cilMagnifyingGlass} size='lg' />
+                <CCol lg={1} md={2}>
+                  <CButton color={"dark"} variant='outline' className='main-search-btn' onClick={handleFormSubmit}> <CIcon icon={cilMagnifyingGlass} size='lg' />
                   </CButton>
                 </CCol>
                 <br />
                 <CCol md={12} className='text-center'>
-                  <CButton className='main-search-btn-mobile'><CIcon icon={cilMagnifyingGlass} size='lg' />
+                  <CButton color={"dark"} variant='outline' className='main-search-btn-mobile'><CIcon icon={cilMagnifyingGlass} size='lg' />
                   </CButton>
                 </CCol>
               </CRow>
@@ -205,7 +196,7 @@ const Dashboard = () => {
                     AI assistant suggests:
                   </span>
                   <div style={{ display: 'flex', flexWrap: 'wrap', marginLeft: '10px' }}>
-                    {synonyms?.map((synonym, index) => (
+                    {associations?.map((association, index) => (
                       <CBadge
                         key={index}
                         className='badge-btn'
@@ -219,10 +210,10 @@ const Dashboard = () => {
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
                         }}
-                        value={synonym}
+                        value={association.item}
                         onClick={handleBadgeClick}
                       >
-                        {synonym}
+                        {association.item}
                       </CBadge>
                     ))}
                   </div>

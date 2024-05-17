@@ -58,7 +58,7 @@ const AppHeader = () => {
             onClick={toggleRotation}
             src="logo.png"
             id="header-logo"
-            height={80}
+            height={40}
             alt="Logo"
             style={{ transform: `rotate(${rotation}deg)` }}
           />
@@ -66,7 +66,7 @@ const AppHeader = () => {
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
             <CNavLink to="/dashboard" component={NavLink}>
-              <h3 style={{ fontWeight: '900' }}>Click</h3>
+              <h6 style={{ fontWeight: '900', marginBottom: '0' }}>Click</h6>
             </CNavLink>
           </CNavItem>
         </CHeaderNav>

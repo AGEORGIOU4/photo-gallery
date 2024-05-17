@@ -24,9 +24,9 @@ const CLightBox = ({ visible, setVisible, data }) => {
             <p><strong>Alt:</strong> {data?.alt_description}</p>
             <p><strong>Created at:</strong> <FormatTimestampDateTime date={data?.createdAt} /></p>
             <p><strong>Source:</strong> <a href={data?.srcRegular}>Link</a></p>
-            <hr />
-            <CButton style={{ width: '100%' }}>Save <CIcon icon={cilSave} /></CButton>
-            <hr />
+            <hr className='white-hr' />
+            <CButton variant='ghost' color='light' style={{ width: '100%' }}>Save <CIcon icon={cilSave} /></CButton>
+            <hr className='white-hr' />
           </CCol>
         </CRow>
 

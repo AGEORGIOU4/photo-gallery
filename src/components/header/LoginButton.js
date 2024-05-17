@@ -5,7 +5,7 @@ import { CButton } from "@coreui/react-pro";
 const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
 
-  return <CButton onClick={() => loginWithRedirect()}>Log In</CButton>;
+  return <CButton variant="outline" color={"dark"} onClick={() => loginWithRedirect()}>Log In</CButton>;
 };
 
 export default LoginButton;
