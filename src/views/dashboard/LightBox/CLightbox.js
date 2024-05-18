@@ -4,8 +4,40 @@ import { CModal, CModalHeader, CModalBody, CRow, CCol, CButton } from '@coreui/r
 import { FormatTimestampDateTime, } from 'src/common/functions';
 import CIcon from '@coreui/icons-react';
 import { cilSave } from '@coreui/icons';
+import { restApiPost } from 'src/common/apis';
+import { server_url } from 'src/common/urls';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const CLightBox = ({ visible, setVisible, data }) => {
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
+  const savePhoto = async () => {
+    if (isAuthenticated) {
+      let userId = user?.sub.split('|')[1];
+      let body = { id: data.id, info: data, userId: userId } || {}
+
+      try {
+        await restApiPost(`${server_url}/api/v1/photo/create`, body).then((result) => {
+          if (result) {
+            console.log(result)
+          }
+        }).catch((e) => {
+          console.error(e)
+        })
+      } catch (error) {
+        console.error('Error saving photo:', error);
+      } finally {
+        console.log("Saved")
+        setVisible(false)
+      }
+    }
+  };
+
+  const handleSave = () => {
+    savePhoto()
+  }
+
+
   return (
     <CModal size="xl" visible={visible} onClose={() => setVisible(false)} aria-labelledby="OptionalSizesExample2">
       <CModalHeader closeButton>
@@ -25,7 +57,7 @@ const CLightBox = ({ visible, setVisible, data }) => {
             <p><strong>Created at:</strong> <FormatTimestampDateTime date={data?.createdAt} /></p>
             <p><strong>Source:</strong> <a href={data?.srcRegular}>Link</a></p>
             <hr className='white-hr' />
-            <CButton variant='ghost' color='light' style={{ width: '100%' }}>Save <CIcon icon={cilSave} /></CButton>
+            <CButton onClick={handleSave} variant='ghost' color='light' style={{ width: '100%' }}>Save <CIcon icon={cilSave} /></CButton>
             <hr className='white-hr' />
           </CCol>
         </CRow>

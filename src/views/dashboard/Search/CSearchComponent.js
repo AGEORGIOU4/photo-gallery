@@ -28,7 +28,6 @@ export const CSearchComponent = () => {
 
   const [associations, setAssociations] = useState([]);
 
-
   const [columns, setColumns] = useState(getColumnCount(window.innerWidth));
 
   const handleClick = (e) => {
@@ -57,8 +56,9 @@ export const CSearchComponent = () => {
       await restApiGet(`${unsplash_url}/search/photos?page=${page}&query=${word}&client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}`).then((result) => {
         if (result?.results) {
           setPhotos(prevPhotos => [...prevPhotos, ...result?.results]);
-          setTotalPages(result?.total_pages || 0);
           console.log(result?.results)
+          setTotalPages(result?.total_pages || 0);
+          // console.log(result?.results)
         }
       }).catch((e) => {
         setTotalPages(0);

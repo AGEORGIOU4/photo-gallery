@@ -151,7 +151,7 @@ body {
 
 .result-image {
   width: 100%;
-  border-radius: 3%;
+  border-radius: 10px;
   height: 9rem;
   object-fit: cover;
   cursor: pointer;
@@ -184,21 +184,10 @@ body {
   margin-left: 10px;
 }
 
-
-.swiper-card {
-  width: 100%;
-  border-radius: 5px;
-  height: 10rem;
-  object-fit: cover;
-  cursor: pointer;
-  transition: scale 0.3s ease;
-}
-
-
-/* Add this CSS to your stylesheet */
 .result-image-container {
   position: relative;
   overflow: hidden;
+  border-radius: 10px !important;
 }
 
 .overlay {
@@ -211,7 +200,7 @@ body {
   height: auto;
   width: 100%;
   opacity: 0;
-  border-radius: 3%;
+  border-radius: 10px !important;
   transition: .5s ease;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
@@ -219,11 +208,13 @@ body {
 
 .result-image-container:hover .overlay {
   opacity: 1;
+  border-radius: 10px !important;
 
 }
 
 .result-image-container:hover .result-image {
   transform: scale(1.1);
+  border-radius: 10px !important;
 }
 
 .profile-picture {

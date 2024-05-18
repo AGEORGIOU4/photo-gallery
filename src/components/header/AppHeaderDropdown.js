@@ -3,7 +3,7 @@ import { CAvatar, CDropdown, CDropdownDivider, CDropdownHeader, CDropdownItem, C
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from './LoginButton';
 import CIcon from '@coreui/icons-react';
-import { cilArrowCircleLeft, cilArrowCircleRight, cilUser } from '@coreui/icons';
+import { cilArrowCircleLeft, cilArrowCircleRight, cilSave, cilUser, cilWindowRestore } from '@coreui/icons';
 import avatar from "../../assets/images/avatars/avatar.png"
 
 const AppHeaderDropdown = () => {
@@ -27,6 +27,10 @@ const AppHeaderDropdown = () => {
               <CDropdownItem href="#/profile">
                 <CIcon icon={cilUser} className="me-2" />
                 Profile
+              </CDropdownItem>
+              <CDropdownItem href="#/profile">
+                <CIcon icon={cilSave} className="me-2" />
+                Saved
               </CDropdownItem>
               <CDropdownDivider />
               <CDropdownItem onClick={() => loginWithRedirect()} style={{ display: !isAuthenticated ? "block" : "none" }}>

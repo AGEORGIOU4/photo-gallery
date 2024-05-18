@@ -13,3 +13,42 @@ export async function restApiGet(url, headers = {}) {
 
   return data;
 }
+
+export async function restApiPost(url, body, headers = {}) {
+  let data = null;
+
+  try {
+    const response = await axios.post(url, body, { headers });
+    data = response.data;
+  } catch (error) {
+    console.log(error);
+  }
+
+  return data;
+}
+
+export async function restApiPut(url, body, headers = {}) {
+  let data = null;
+
+  try {
+    const response = await axios.put(url, body, { headers });
+    data = response.data;
+  } catch (error) {
+    console.log(error);
+  }
+
+  return data;
+}
+
+export async function restApiDelete(url, headers = {}) {
+  let data = null;
+
+  try {
+    const response = await axios.delete(url, { headers });
+    data = response.data;
+  } catch (error) {
+    console.log(error);
+  }
+
+  return data;
+}

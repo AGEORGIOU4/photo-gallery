@@ -12,17 +12,26 @@ const Profile = () => {
     return <div><CLoading /></div>;
   }
 
+  console.log(user)
+
   if (isAuthenticated) {
     return (
-      <div>
-        <CImage rounded src={user.picture} alt={user.name} />
-        <br />
-        <br />
-        <h2 className="profile-text"><strong>{user.name}</strong></h2>
-        <h6 className="profile-text">{user.email}</h6>
-        <hr style={{ height: '5px' }} />
-        <h6 className="profile-text" style={{ position: 'absolute', bottom: '50px', right: '20px' }}>Member since <FormatTimestamp date={user.updated_at} /></h6>
-      </div>
+      <>
+        <div>
+          <CImage rounded src={user.picture} alt={user.name} />
+          <br />
+          <br />
+          <h2 className="profile-text"><strong>{user.name}</strong></h2>
+          <h6 className="profile-text">{user.email}</h6>
+          <hr style={{ height: '5px' }} />
+          <h6 className="profile-text" style={{ position: 'absolute', bottom: '50px', right: '20px' }}>Member since <FormatTimestamp date={user.updated_at} /></h6>
+        </div>
+        <div style={{ textAlign: 'center', color: 'red', }}>
+          <p style={{ textDecoration: 'none', transition: 'text-decoration 0.3s', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.textDecoration = 'underline'} onMouseLeave={(e) => e.target.style.textDecoration = 'none'}>Permanently delete account</p>
+        </div>
+
+
+      </>
     );
   }
 
