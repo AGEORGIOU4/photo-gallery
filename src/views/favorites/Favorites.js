@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { CLoading } from "src/common/CLoading";
 import { restApiGet } from "src/common/apis";
-import ImageGallery from "react-image-gallery";
 import LoginButton from "src/components/header/LoginButton";
 import { server_url } from "src/common/urls";
 import { CRow } from "@coreui/react-pro";

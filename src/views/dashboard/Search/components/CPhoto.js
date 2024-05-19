@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CCol, CImage, CRow } from '@coreui/react-pro';
+import { CCol, CImage } from '@coreui/react-pro';
 
 const CPhoto = (props) => {
   const {
