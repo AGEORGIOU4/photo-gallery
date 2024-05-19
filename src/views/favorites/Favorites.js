@@ -7,12 +7,16 @@ import { server_url } from "src/common/urls";
 import { CRow } from "@coreui/react-pro";
 import CPhoto from "../dashboard/Search/components/CPhoto";
 import { getColumnCount } from "../dashboard/helpers";
+import CLightbox from "../dashboard/LightBox/CLightbox";
 
 const Favorites = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [loading, setLoading] = useState(false);
   const [photos, setPhotos] = useState([]);
   const [error, setError] = useState(null);
+
+  const [showLightbox, setShowLightbox] = useState(false)
+  const [selectedPhoto, setSelectedPhoto] = useState({});
 
   const [columns, setColumns] = useState(getColumnCount(window.innerWidth));
 
@@ -29,6 +33,12 @@ const Favorites = () => {
     };
   }, []);
 
+
+  const handleClick = (e) => {
+    setSelectedPhoto(e.target.dataset)
+    setShowLightbox(!showLightbox)
+  }
+
   const fetchPhotos = async () => {
     setLoading(true);
     setError(null);
@@ -37,7 +47,6 @@ const Favorites = () => {
       if (isAuthenticated) {
         const userId = user?.sub.split('|')[1];
         const tmp_photos = await restApiGet(`${server_url}/api/v1/photo/read/${userId}`);
-        console.log(tmp_photos)
         if (tmp_photos && tmp_photos.records.length > 0) {
           setPhotos(tmp_photos.records);
         } else {
@@ -54,7 +63,7 @@ const Favorites = () => {
 
   useEffect(() => {
     fetchPhotos();
-  }, [isAuthenticated]);
+  }, [isAuthenticated, showLightbox]);
 
   if (isLoading) {
     return <div><CLoading /></div>;
@@ -66,6 +75,7 @@ const Favorites = () => {
     }
     return (
       <div >
+        <CLightbox showRemove={true} setVisible={setShowLightbox} visible={showLightbox} data={selectedPhoto} />
         <CRow xs={{ cols: 1 }} md={{ cols: columns }} className="g-4" style={{ placeContent: 'center' }}>
           {photos?.map((photo, index) => (
             <CPhoto
@@ -76,10 +86,10 @@ const Favorites = () => {
               title={photo.info.title || ""}
               description={photo.info.description || ""}
               alt_description={photo.info.alt_description || ""}
-              regular={photo.info.regular || ""}
-              created_at={photo.info.created_at || ""}
+              regular={photo.info.srcRegular || ""}
+              created_at={photo.info.createdAt || ""}
               user={photo.info.user ? JSON.parse(photo.info.user) : {}}
-              handleClick={() => { }}
+              handleClick={handleClick}
             />
           ))}
         </CRow>

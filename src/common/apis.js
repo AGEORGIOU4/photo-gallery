@@ -40,14 +40,19 @@ export async function restApiPut(url, body, headers = {}) {
   return data;
 }
 
-export async function restApiDelete(url, headers = {}) {
+export async function restApiDelete(url, body, headers = {}) {
   let data = null;
 
   try {
-    const response = await axios.delete(url, { headers });
+    const response = await axios.delete(url, {
+      headers,
+      data: body
+    });
     data = response.data;
   } catch (error) {
     console.log(error);
+    // Optionally, you can return the error or throw it again if needed
+    // data = { error: error.message };
   }
 
   return data;

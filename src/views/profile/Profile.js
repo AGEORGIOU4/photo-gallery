@@ -17,7 +17,7 @@ const Profile = () => {
   if (isAuthenticated) {
     return (
       <>
-        <div>
+        <div style={{ textAlign: 'center' }}>
           <CImage rounded src={user.picture} alt={user.name} />
           <br />
           <br />

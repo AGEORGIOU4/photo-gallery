@@ -29,7 +29,7 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'Favorites',
+    name: 'Saved',
     to: '/favorites',
     icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
   },
