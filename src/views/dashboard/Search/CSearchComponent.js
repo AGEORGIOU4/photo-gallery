@@ -227,7 +227,7 @@ export const CSearchComponent = () => {
                 <img src={unsplashLogo} height={60} alt="Unsplash Logo" className="ms-3 " />
               </p>
             </CCol>
-            <hr style={{ height: '5px' }} />
+            <hr style={{ height: '5px', marginBottom: '0' }} />
             <CRow xs={{ cols: 1 }} md={{ cols: columns }} className="g-4" style={{ placeContent: 'center' }}>
               {photos?.map((photo, index) => (
                 <CPhoto
