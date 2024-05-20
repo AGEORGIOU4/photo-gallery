@@ -8,6 +8,8 @@ import { CRow } from "@coreui/react-pro";
 import CPhoto from "../dashboard/Search/components/CPhoto";
 import { getColumnCount } from "../dashboard/helpers";
 import CLightbox from "../dashboard/LightBox/CLightbox";
+import { cilStar } from "@coreui/icons";
+import CIcon from "@coreui/icons-react";
 
 const Favorites = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -75,6 +77,7 @@ const Favorites = () => {
     }
     return (
       <div >
+        <p><strong>Favorites <CIcon icon={cilStar} /></strong></p>
         <CLightbox showRemove={true} setVisible={setShowLightbox} visible={showLightbox} data={selectedPhoto} />
         <CRow xs={{ cols: 1 }} md={{ cols: columns }} className="g-4" style={{ placeContent: 'center' }}>
           {photos?.map((photo, index) => (

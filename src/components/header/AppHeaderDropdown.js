@@ -28,10 +28,6 @@ const AppHeaderDropdown = () => {
                 <CIcon icon={cilUser} className="me-2" />
                 Profile
               </CDropdownItem>
-              <CDropdownItem href="#/favorites">
-                <CIcon icon={cilStar} className="me-2" />
-                Saved
-              </CDropdownItem>
               <CDropdownDivider />
               <CDropdownItem onClick={() => loginWithRedirect()} style={{ display: !isAuthenticated ? "block" : "none" }}>
                 <CIcon icon={cilArrowCircleRight} className="me-2" />

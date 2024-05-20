@@ -3,6 +3,7 @@ import CIcon from '@coreui/icons-react'
 import {
   cibGoogleAnalytics,
   cilHome,
+  cilLayers,
   cilStar,
   cilUser,
 } from '@coreui/icons'
@@ -15,21 +16,21 @@ const _nav = [
     to: '/dashboard',
     icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
   },
-  {
-    component: CNavItem,
-    name: 'Profile',
-    to: '/profile',
-    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'Profile',
+  //   to: '/profile',
+  //   icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
+  // },
   {
     component: CNavItem,
     name: 'Analytics',
     to: '/analytics',
-    icon: <CIcon icon={cibGoogleAnalytics} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilLayers} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
-    name: 'Saved',
+    name: 'Favorites',
     to: '/favorites',
     icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
   },

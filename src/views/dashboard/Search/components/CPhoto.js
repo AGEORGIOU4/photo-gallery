@@ -30,7 +30,7 @@ const CPhoto = (props) => {
   };
 
   return (
-    <CCol xs  {...commonProps}>
+    <CCol xs  {...commonProps} className='results-col'>
       <div className="result-image-container" {...commonProps}>
         <CImage
           {...commonProps}

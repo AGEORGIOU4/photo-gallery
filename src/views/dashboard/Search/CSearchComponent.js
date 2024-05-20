@@ -6,14 +6,17 @@ import { CBadge, CButton, CCol, CForm, CFormInput, CImage, CRow, } from '@coreui
 import unsplashLogo from '../../../assets/images/other/unsplash_logo.png';
 import CIcon from '@coreui/icons-react';
 import { cilMagnifyingGlass } from '@coreui/icons';
-import { unsplash_url, word_associations_url } from 'src/common/urls';
-import { restApiGet } from 'src/common/apis';
+import { server_url, unsplash_url, word_associations_url } from 'src/common/urls';
+import { restApiGet, restApiPost } from 'src/common/apis';
 import CLightbox from '../LightBox/CLightbox';
+import { useAuth0 } from '@auth0/auth0-react';
 
 
 let tmp_query = "Random"
 
 export const CSearchComponent = () => {
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
   const [loading, setLoading] = useState(true);
   const [aiLoading, setAILoading] = useState(true);
   const [showLightbox, setShowLightbox] = useState(false)
@@ -56,9 +59,7 @@ export const CSearchComponent = () => {
       await restApiGet(`${unsplash_url}/search/photos?page=${page}&query=${word}&client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}`).then((result) => {
         if (result?.results) {
           setPhotos(prevPhotos => [...prevPhotos, ...result?.results]);
-          console.log(result?.results)
           setTotalPages(result?.total_pages || 0);
-          // console.log(result?.results)
         }
       }).catch((e) => {
         setTotalPages(0);
@@ -81,7 +82,7 @@ export const CSearchComponent = () => {
     let tmp_items = []
 
     try {
-      await restApiGet(`${word_associations_url}/search?apikey=${process.env.REACT_APP_WORD_ASSOCIATIONS_KEY}&text=${word}&lang=en&type=stimulus&limit=5`)
+      await restApiGet(`${word_associations_url}/search?apikey=${process.env.REACT_APP_WORD_ASSOCIATIONS_KEY}&text=${word}&lang=en&type=stimulus&limit=6`)
         .then((result) => {
           if (result && result?.response) {
             tmp_items = result.response[0].items || []
@@ -102,12 +103,34 @@ export const CSearchComponent = () => {
     }
   };
 
+  const saveSearch = async () => {
+    if (isAuthenticated) {
+      let userId = user?.sub.split('|')[1];
+      let body = { userId: userId, keywords: query } || {}
+
+      try {
+        await restApiPost(`${server_url}/api/v1/search/create`, body).then((result) => {
+          if (result) {
+            console.log(result)
+          }
+        }).catch((e) => {
+          console.error(e)
+        })
+      } catch (error) {
+        console.error('Error saving keyword:', error);
+      } finally {
+        console.log("Saved")
+      }
+    }
+  };
+
   const handleQuery = (e) => {
     e.preventDefault()
     setPhotos([])
     fetchPhotos()
     setAssociations([])
     fetchAssociations()
+    saveSearch()
   }
 
   const handleBadgeClick = (e) => {
@@ -122,6 +145,7 @@ export const CSearchComponent = () => {
     fetchPhotos(true)
     setAssociations([])
     fetchAssociations()
+    saveSearch()
   }
 
   useEffect(() => {
@@ -158,25 +182,29 @@ export const CSearchComponent = () => {
       {/* Section 1 - Search Input */}
       <CForm onSubmit={handleFormSubmit}>
         <CRow>
-          <CCol lg={11} md={10}>
+          <CCol lg={12} md={12} className="position-relative">
+            <button className="search-button" onClick={handleFormSubmit}>
+              <i className="fas fa-search"></i>
+            </button>
             <CFormInput
               autoComplete="off"
               className="main-search-bar"
-              placeholder="Search Anything..."
+              placeholder="Search images"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              onFocusCapture={(e) => setQuery("")}
+              onFocusCapture={(e) => setQuery('')}
             />
+            <div className="divider"></div>
           </CCol>
-          <CCol lg={1} md={2}>
+          {/* <CCol lg={1} md={2}>
             <CButton color={"dark"} variant='outline' className='main-search-btn' onClick={handleFormSubmit}> <CIcon icon={cilMagnifyingGlass} size='lg' />
             </CButton>
-          </CCol>
-          <br />
+          </CCol> */}
+          {/* <br />
           <CCol md={12} className='text-center'>
             <CButton color={"dark"} variant='outline' className='main-search-btn-mobile' onClick={handleFormSubmit}><CIcon icon={cilMagnifyingGlass} size='lg' />
             </CButton>
-          </CCol>
+          </CCol> */}
         </CRow>
       </CForm>
 
@@ -184,7 +212,7 @@ export const CSearchComponent = () => {
       <div style={{ opacity: loading ? 0.4 : 1, padding: '10px 0' }}>
         {totalPages > 0 &&
           <CRow className="d-flex justify-content-center ">
-            <CCol className='suggestions-section' md={9} style={{ display: 'flex', alignItems: 'center' }}>
+            <CCol className='suggestions-section' md={10} style={{ display: 'flex', alignItems: 'center' }}>
               <span
                 className={aiLoading ? 'blink' : ''}
                 style={{
@@ -221,14 +249,14 @@ export const CSearchComponent = () => {
                 ))}
               </div>
             </CCol>
-            <CCol md={3} style={{ textAlign: 'end' }}>
+            <CCol md={2} style={{ textAlign: 'end' }}>
               <p className='powered-p' style={{ fontFamily: 'Arial, sans-serif', fontWeight: 'bold', color: '#333', fontSize: 'initial' }}>
                 <span style={{ fontSize: 'smaller', textAlign: 'end', width: '100%' }}>Powered by</span>
                 <img src={unsplashLogo} height={60} alt="Unsplash Logo" className="ms-3 " />
               </p>
             </CCol>
             <hr style={{ height: '5px', marginBottom: '0' }} />
-            <CRow xs={{ cols: 1 }} md={{ cols: columns }} className="g-4" style={{ placeContent: 'center' }}>
+            <CRow xs={{ cols: 1 }} md={{ cols: columns }} className="g-4 results-row" style={{ placeContent: 'center' }}>
               {photos?.map((photo, index) => (
                 <CPhoto
                   key={index}
