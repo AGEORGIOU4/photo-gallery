@@ -27,9 +27,11 @@ const CLightBox = ({ visible, setVisible, data, showRemove = false }) => {
       } catch (error) {
         console.error('Error saving photo:', error);
       } finally {
-        console.log("Saved")
         setVisible(false)
       }
+    } else {
+      alert("Please Sign in to save photos.")
+      setVisible(false)
     }
   };
 

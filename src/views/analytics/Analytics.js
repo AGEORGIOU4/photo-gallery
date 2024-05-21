@@ -80,7 +80,21 @@ const Analytics = () => {
     );
   }
 
-  return <LoginButton />;
+
+  return (
+    <div style={styles.centeredContainer}>
+      <LoginButton />
+    </div>
+  );
+};
+
+const styles = {
+  centeredContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '80vh',
+  },
 };
 
 export default Analytics;
