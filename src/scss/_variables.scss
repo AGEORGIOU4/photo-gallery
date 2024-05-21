@@ -120,7 +120,7 @@
 $primary: #01AAB1;
 $secondary: #4E5156;
 $success: #23b85c;
-$info: #3399ff;
+$info: #e91e63;
 $warning: #f9b115;
 $danger: #e55353;
 $light: #dcdde2;
@@ -132,7 +132,7 @@ $theme-colors: (
   "primary": #01AAB1,
   "secondary": #4E5156,
   "success": #23b85c,
-  "info": #3399ff,
+  "info": #e91e63,
   "warning": #f9b115,
   "danger": #e55353,
   "light": #dcdde2,
@@ -525,7 +525,7 @@ $headings-font-family: "Montserrat";
 // $headings-font-style:         null !default;
 // $headings-font-weight:        500 !default;
 // $headings-line-height:        1.2 !default;
-$headings-color: #fff;
+$headings-color: #414141;
 // scss-docs-end headings-variables
 
 // scss-docs-start display-headings
@@ -567,7 +567,7 @@ $headings-color: #fff;
 // $blockquote-footer-font-size:   $small-font-size !default;
 
 // $hr-margin-y:                   $spacer !default;
-$hr-color: #fff;
+$hr-color: #414141;
 // $hr-height:                     $border-width !default;
 // $hr-opacity:                    .25 !default;
 
@@ -1319,11 +1319,11 @@ $input-border-radius: 50px;
 
 // Badges
 // scss-docs-start badge-variables
-// $badge-font-size:                   .75em !default;
+$badge-font-size: 1.1em;
 // $badge-font-weight:                 $font-weight-bold !default;
 // $badge-color:                       $high-emphasis-inverse !default;
-// $badge-padding-y:                   .35em !default;
-// $badge-padding-x:                   .65em !default;
+$badge-padding-y: 0.8em;
+$badge-padding-x: 2.65em;
 // $badge-border-radius:               $border-radius !default;
 // scss-docs-end badge-variables
 
@@ -1723,8 +1723,8 @@ $sidebar-bg: #000;
 // $footer-min-height:    3rem !default;
 // $footer-padding-y:     $spacer / 2 !default;
 // $footer-padding-x:     $spacer !default;
-// $footer-bg:            $gray-100 !default;
-// $footer-color:         $body-color !default;
+$footer-bg: #000;
+$footer-color: #fff;
 // $footer-border-width:  1px !default;
 // $footer-border-color:  $border-color !default;
 // scss-docs-end footer-variables
@@ -1749,7 +1749,7 @@ $sidebar-bg: #000;
 // $btn-close-height:           $btn-close-width !default;
 // $btn-close-padding-x:        .25em !default;
 // $btn-close-padding-y:        $btn-close-padding-x !default;
-// $btn-close-color:            $high-emphasis !default;
+$btn-close-color: #fff;
 // $btn-close-bg:               url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$btn-close-color}'><path d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/></svg>") !default;
 // $btn-close-focus-shadow:     $input-btn-focus-box-shadow !default;
 // $btn-close-opacity:          .5 !default;

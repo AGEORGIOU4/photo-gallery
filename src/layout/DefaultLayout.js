@@ -1,11 +1,12 @@
 import React from 'react'
-import { AppAside, AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
+import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 const DefaultLayout = () => {
   return (
     <>
       <AppSidebar />
-      <div className="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent back-photo">
+      {/* <div className={`wrapper d-flex flex-column min-vh-100 ${isProfilePage() ? 'profile-photo' : 'back-photo'}`}> */}
+      <div className={`wrapper d-flex flex-column min-vh-100`}>
         <AppHeader />
         <div className="body flex-grow-1 px-3">
           <AppContent />
@@ -15,7 +16,6 @@ const DefaultLayout = () => {
         <br />
         <AppFooter />
       </div>
-      <AppAside />
     </>
   )
 }
